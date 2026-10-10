@@ -1,4 +1,4 @@
-name: OCI A1 Instance Auto Grab
+name: OCI_A1_Instance_Auto_Grab
 
 on:
   schedule:
