@@ -128,7 +128,7 @@ jobs:
               --subnet-id "$OCI_SUBNET_ID" \
               --assign-public-ip true \
               --metadata "{\"ssh_authorized_keys\": \"$OCI_SSH_PUBLIC_KEY\"}" \
-              --display-name "A1-Auto-Grabbed" \
+              --display-name "arm1" \
               2>&1)
 
             if echo "$CREATE_RESULT" | jq -e '.data.id' > /dev/null 2>&1; then
