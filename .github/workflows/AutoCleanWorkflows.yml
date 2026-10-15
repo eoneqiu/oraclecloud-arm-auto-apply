@@ -1,0 +1,18 @@
+name: Auto Clean Workflows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete old workflow runs
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN  }} # 这里用默认token
+          repository: ${{ github.repository }} # 自动识别当前仓库，不用手写
+          retain_days: 0 # 按天数保留设为0
+          keep_minimum_runs: 3 # 🎯 核心：保留最近 3 个运行记录
