@@ -22,3 +22,7 @@ jobs:
           workflows_keep_day: 0
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+      - name: Debug token
+        run: echo "Token is $GH_TOKEN"
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
