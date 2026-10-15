@@ -1,13 +1,12 @@
 name: Auto Clean Releases and Workflows
 
 on:
-  # 手动触发：方便随时在 Actions 页面按需执行
   workflow_dispatch:
     inputs:
       number:
         description: 'Number of latest releases to keep'
         required: false
-        default: '3' # 手动触发时默认保留最近 8 个版本
+        default: '3'
 
 jobs:
   cleanup:
@@ -16,13 +15,10 @@ jobs:
       - name: Delete old releases and workflows
         uses: ophub/delete-releases-workflows@main
         with:
-          # 释放管理配置
-          delete_releases: true               # 启用删除旧版本
-          releases_keep_latest: ${{ github.event.inputs.number || 3 }} # 保留最近 N 个版本 (手动输入优先，否则默认8)
-          delete_tags: true                   # 同时删除与旧版本关联的 Git 标签
-          
-          # 工作流管理配置
-          delete_workflows: true              # 启用删除旧的工作流运行记录
-          workflows_keep_day: 0               # 保留最近 N 天的工作流记录，0 表示全部删除
+          delete_releases: true
+          releases_keep_latest: ${{ github.event.inputs.number || 3 }}
+          delete_tags: true
+          delete_workflows: true
+          workflows_keep_day: 0
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用默认令牌进行授权操作
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
