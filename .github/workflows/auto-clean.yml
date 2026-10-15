@@ -18,7 +18,7 @@ jobs:
         with:
           # 释放管理配置
           delete_releases: true               # 启用删除旧版本
-          releases_keep_latest: ${{ github.event.inputs.number || 8 }} # 保留最近 N 个版本 (手动输入优先，否则默认8)
+          releases_keep_latest: ${{ github.event.inputs.number || 3 }} # 保留最近 N 个版本 (手动输入优先，否则默认8)
           delete_tags: true                   # 同时删除与旧版本关联的 Git 标签
           
           # 工作流管理配置
