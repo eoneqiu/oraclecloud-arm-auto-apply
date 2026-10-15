@@ -30,7 +30,7 @@ jobs:
             echo "Token 长度: ${#GH_TOKEN}" # 打印长度，既安全又能确认非空
           fi
         env:
-          GH_TOKEN: ${{ secrets.MY_PAT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
 
       # ==========================================
       # 2. 核心清理步骤（按官方示例传参）
@@ -39,7 +39,7 @@ jobs:
         uses: ophub/delete-releases-workflows@main
         with:
           # 👇 核心修复：按照官方示例，将 token 直接作为 with 的参数传入
-          gh_token: ${{ secrets.MY_PAT }} 
+          gh_token: ${{ secrets.GITHUB_TOKEN  }} 
           
           # ⚠️ 请确认这里写的是你要清理的目标仓库（如果当前仓库就是这个，可以删掉这行）
           repo: eoneqiu/oraclecloud-arm-auto-apply 
