@@ -10,7 +10,8 @@ on:
 
 # 强制赋予 GITHUB_TOKEN 写权限，这是在 YAML 层面最稳妥的做法
 permissions:
-  contents: write
+  contents: write  # 删除 Release 和 Tag 所需
+  actions: write   # 删除 Workflow 运行记录所需
 
 jobs:
   cleanup:
