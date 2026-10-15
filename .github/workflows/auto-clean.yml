@@ -8,6 +8,10 @@ on:
         required: false
         default: '3'
 
+# 强制赋予 GITHUB_TOKEN 写权限，这是在 YAML 层面最稳妥的做法
+permissions:
+  contents: write
+
 jobs:
   cleanup:
     runs-on: ubuntu-latest
@@ -21,8 +25,5 @@ jobs:
           delete_workflows: true
           workflows_keep_day: 0
         env:
-          gh_token: ${{ secrets.GITHUB_TOKEN  }}
-      - name: Debug token
-        run: echo "Token is $GH_TOKEN"
-        env:
-          gh_token: ${{ secrets.GITHUB_TOKEN  }}
+          # 使用默认的 Token，名称必须是 GH_TOKEN
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
