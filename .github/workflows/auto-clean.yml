@@ -25,4 +25,4 @@ jobs:
           delete_workflows: true              # 启用删除旧的工作流运行记录
           workflows_keep_day: 0               # 保留最近 N 天的工作流记录，0 表示全部删除
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用默认令牌进行授权操作
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用默认令牌进行授权操作
