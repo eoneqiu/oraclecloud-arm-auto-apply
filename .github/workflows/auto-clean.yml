@@ -10,11 +10,17 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug token
+        run: echo "Token is $GH_TOKEN"
+        env:
+          GH_TOKEN: ${{ secrets.MY_PAT }}
+          
       - name: Delete old releases and workflows
         uses: ophub/delete-releases-workflows@main
         with:
@@ -27,7 +33,4 @@ jobs:
           # 创建的 MY_PAT
           GH_TOKEN: ${{ secrets.MY_PAT }}
           
-      - name: Debug token
-        run: echo "Token is $GH_TOKEN"
-        env:
-          GH_TOKEN: ${{ secrets.MY_PAT }}
+
