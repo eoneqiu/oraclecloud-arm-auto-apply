@@ -15,22 +15,29 @@ permissions:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    # 👇 使用你实际创建的 Secret 名称 MY_PAT
+    env:
+      GH_TOKEN: ${{ secrets.MY_PAT }} 
+
     steps:
-      - name: Debug token
-        run: echo "Token is $GH_TOKEN"
-        env:
-          GH_TOKEN: ${{ secrets.MY_PAT }}
-          
+      # 1. 先验证 Token 是否成功注入
+      - name: Verify Token
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "❌ 错误：GH_TOKEN 是空的！"
+            exit 1
+          else
+            echo "✅ 成功：GH_TOKEN 已成功注入！"
+          fi
+
+      # 2. 确认没问题后再执行清理
       - name: Delete old releases and workflows
         uses: ophub/delete-releases-workflows@main
         with:
+          # 如果你运行此 workflow 的仓库就是 oraclecloud-arm-auto-apply，这行可以保留或删掉
+          repo: eoneqiu/oraclecloud-arm-auto-apply 
           delete_releases: true
           releases_keep_latest: ${{ github.event.inputs.number || 3 }}
           delete_tags: true
           delete_workflows: true
           workflows_keep_day: 0
-        env:
-          # 创建的 MY_PAT
-          GH_TOKEN: ${{ secrets.MY_PAT }}
-          
-
