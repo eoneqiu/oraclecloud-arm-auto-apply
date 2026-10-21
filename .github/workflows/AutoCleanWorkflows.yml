@@ -15,4 +15,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN  }} # 这里用默认token
           repository: ${{ github.repository }} # 自动识别当前仓库，不用手写
           retain_days: 0 # 按天数保留设为0
-          keep_minimum_runs: 3 # 🎯 核心：保留最近 3 个运行记录
+          keep_minimum_runs: 1 # 🎯 核心：保留最近 3 个运行记录
